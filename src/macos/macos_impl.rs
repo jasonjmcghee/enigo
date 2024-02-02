@@ -336,8 +336,8 @@ impl Keyboard for Enigo {
             event.set_string(chunk);
 
             event.post(CGEventTapLocation::HID);
+            thread::sleep(Duration::from_millis(2));
         }
-        thread::sleep(Duration::from_millis(100));
         Ok(Some(()))
     }
 
