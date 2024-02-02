@@ -337,7 +337,7 @@ impl Keyboard for Enigo {
 
             event.post(CGEventTapLocation::HID);
         }
-        thread::sleep(Duration::from_millis(20));
+        thread::sleep(Duration::from_millis(100));
         Ok(Some(()))
     }
 
