@@ -333,7 +333,7 @@ impl Keyboard for Enigo {
                     "failed creating event to enter the text",
                 ));
             };
-            event.set_string(chunk.replace('\n', " \n"));
+            event.set_string(&chunk.replace('\n', " \n"));
 
             event.post(CGEventTapLocation::HID);
         }
