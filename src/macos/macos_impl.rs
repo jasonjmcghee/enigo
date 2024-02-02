@@ -327,17 +327,17 @@ impl Keyboard for Enigo {
         // NOTE(dustin): This is a fix for issue https://github.com/enigo-rs/enigo/issues/68
         // The CGEventKeyboardSetUnicodeString function (used inside of
         // event.set_string(chunk)) truncates strings down to 20 characters
-        for chunk in chunks(text, 20) {
+        for chunk in chunks(text, 19) {
             let Ok(event) = CGEvent::new_keyboard_event(self.event_source.clone(), 0, true) else {
                 return Err(InputError::Simulate(
                     "failed creating event to enter the text",
                 ));
             };
-            event.set_string(chunk);
+            event.set_string(chunk.replace('\n', " \n"));
 
             event.post(CGEventTapLocation::HID);
-            thread::sleep(Duration::from_millis(2));
         }
+        thread::sleep(Duration::from_millis(2));
         Ok(Some(()))
     }
 
